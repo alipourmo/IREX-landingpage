@@ -48,49 +48,6 @@ main {
 
 
 /* =========================================================
-   SMART PRELOADER
-   ========================================================= */
-
-.smart-preloader {
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    overflow: hidden;
-    background: var(--navy);
-    pointer-events: auto;
-    transform: translate3d(0, 0, 0);
-    transition: transform 0.72s cubic-bezier(0.83, 0, 0.17, 1);
-}
-
-.smart-preloader--exit {
-    transform: translate3d(0, -100%, 0);
-    pointer-events: none;
-}
-
-.smart-preloader__fill {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: #C97A32;
-    transform-origin: 50% 100%;
-    transition: transform 0.18s linear;
-    will-change: transform;
-}
-
-.smart-preloader__counter {
-    position: absolute;
-    right: clamp(24px, 4vw, 56px);
-    bottom: clamp(22px, 4vw, 54px);
-    z-index: 2;
-    font-family: 'Instrument Serif', serif;
-    font-size: clamp(3.6rem, 9vw, 8rem);
-    line-height: 0.82;
-    color: var(--white);
-    pointer-events: none;
-}
-
-
-/* =========================================================
    COMMON / TYPOGRAPHY
    ========================================================= */
 
@@ -1459,6 +1416,19 @@ h2 {
     box-shadow: 0 30px 100px rgba(0, 0, 0, 0.45);
 }
 
+.apply-modal--split {
+    width: min(1080px, 100%);
+
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+}
+
+.apply-modal--split .apply-form {
+    margin-top: 0;
+}
+
 .apply-modal h2 {
     font-size: clamp(3rem, 5vw, 54px);
 
@@ -1515,7 +1485,7 @@ h2 {
     gap: 9px;
 }
 
-.apply-form label:nth-of-type(4) {
+.apply-form .apply-form__full {
     grid-column: 1 / -1;
 }
 
@@ -1578,6 +1548,12 @@ h2 {
    ========================================================= */
 
 @media (max-width: 900px) {
+    .apply-modal--split {
+        width: min(680px, 100%);
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
 
     .line-sidebar {
         display: none;
@@ -1774,7 +1750,7 @@ h2 {
         grid-template-columns: 1fr;
     }
 
-    .apply-form label:nth-of-type(4) {
+    .apply-form .apply-form__full {
         grid-column: auto;
     }
 

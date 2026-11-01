@@ -31,16 +31,18 @@ export default function ApplyModal({ open, onClose }: { open: boolean; onClose: 
   return (
     <div className="modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}>
       <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
-      <div className="apply-modal" role="dialog" aria-modal="true" aria-labelledby="apply-title" ref={dialogRef}>
+      <div className={`apply-modal${state === 'success' ? '' : ' apply-modal--split'}`} role="dialog" aria-modal="true" aria-labelledby="apply-title" ref={dialogRef}>
         <button className="modal-close" onClick={onClose} aria-label="Close application form">×</button>
         {state === 'success' ? <div className="modal-success"><span className="eyebrow">EARLY ADOPTER PROGRAM</span><h2 id="apply-title">Application received.</h2><p>Thank you. We’ll be in touch.</p></div> : <>
-          <span className="eyebrow">EARLY ADOPTER PROGRAM</span><h2 id="apply-title">Better Decisions. Fewer Costly Errors.</h2><p className="modal-intro">Foundation Partners gain an early voice in defining how Computational Geological Reasoning™ is applied to real exploration decisions.</p>
+          <div className="apply-modal__copy">
+            <span className="eyebrow">EARLY ADOPTER PROGRAM</span><h2 id="apply-title">Better Decisions. Fewer Costly Errors.</h2><p className="modal-intro">Foundation Partners gain an early voice in defining how Computational Geological Reasoning™ is applied to real exploration decisions.</p>
+          </div>
           <form onSubmit={submit} className="apply-form">
             <input name="website" tabIndex={-1} autoComplete="off" className="honeypot" aria-hidden="true" />
             <label>Name<input name="name" required maxLength={120} /></label>
             <label>Company<input name="company" required maxLength={160} /></label>
-            <label>Email<input name="email" type="email" required maxLength={180} /></label>
-            <label>Message<textarea name="message" rows={5} maxLength={3000} /></label>
+            <label className="apply-form__full">Email<input name="email" type="email" required maxLength={180} /></label>
+            <label className="apply-form__full">Message<textarea name="message" rows={5} maxLength={3000} /></label>
             <div
               className="cf-turnstile captcha-field"
               data-sitekey={TURNSTILE_SITE_KEY}

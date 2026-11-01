@@ -1,10 +1,10 @@
 export const sections = [
-  { id: 'hero', label: 'Hero' },
+  { id: 'hero', label: 'Overview' },
   { id: 'principle', label: 'Principle' },
   { id: 'transparency', label: 'Transparency' },
   { id: 'control', label: 'Control' },
   { id: 'value', label: 'Economic Value' },
-  { id: 'positioning', label: 'Positioning' },
+  { id: 'positioning', label: 'Beyond Prediction' },
   { id: 'cgr-definition', label: 'CGR' },
   { id: 'apply', label: 'Apply' },
 ] as const;
