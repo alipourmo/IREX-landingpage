@@ -150,8 +150,23 @@ export default function ScrollVideoScene({ onApply }: { onApply?: () => void }) 
                 <SpecularButton onClick={onApply}>
                   Apply to Join <span aria-hidden="true">↗</span>
                 </SpecularButton>
-                <span className="microcopy">Limited Early Adopter Program</span>
+                <SpecularButton
+                  variant="secondary"
+                  onClick={() => document.getElementById('method')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  How it works <span aria-hidden="true">↓</span>
+                </SpecularButton>
               </div>
+            )}
+            {scene.cta && scene.coreLine && (
+              <p className="hero-core-line" aria-label={scene.coreLine}>
+                {scene.coreLine.replace(/\.$/, '').split('. ').map((word, i) => (
+                  <span key={word} style={{ display: 'contents' }}>
+                    {i > 0 && <i aria-hidden="true" />}
+                    <span>{word}</span>
+                  </span>
+                ))}
+              </p>
             )}
           </article>
         ))}

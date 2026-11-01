@@ -27,9 +27,14 @@ function hexColor(hex: string) {
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
+  /** Design system v2 hierarchy: one primary per view. */
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'm' | 'l';
 };
 
-export default function SpecularButton({ children, className = '', ...props }: Props) {
+const RADIUS = 12; // radius/md
+
+export default function SpecularButton({ children, className = '', variant = 'primary', size = 'l', ...props }: Props) {
   const btnRef = useRef<HTMLButtonElement>(null);
   const fxRef = useRef<HTMLSpanElement>(null);
 
@@ -50,7 +55,7 @@ export default function SpecularButton({ children, className = '', ...props }: P
       vertex: VERT,
       fragment: FRAG,
       uniforms: {
-        uCenter: { value: [0, 0] }, uHalfSize: { value: [1, 1] }, uRadius: { value: 10 * dpr }, uAngle: { value: 2.4 },
+        uCenter: { value: [0, 0] }, uHalfSize: { value: [1, 1] }, uRadius: { value: RADIUS * dpr }, uAngle: { value: 2.4 },
         uPx: { value: dpr }, uLineColor: { value: hexColor('#00B8C4') }, uBaseColor: { value: hexColor('#394451') },
         uIntensity: { value: 0 }, uShineSize: { value: 10 * Math.PI / 180 }, uShineFade: { value: 40 * Math.PI / 180 },
         uThickness: { value: 1 * dpr }, uBaseWidth: { value: dpr },
@@ -82,7 +87,7 @@ export default function SpecularButton({ children, className = '', ...props }: P
       const dt = Math.min((now - last) / 1000, 0.05); last = now; idle += 0.25 * dt;
       const target = pointerAngle ?? idle; const diff = ((target - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
       angle += diff * (1 - Math.exp(-dt * 7)); bright += (proximity - bright) * (1 - Math.exp(-dt * 8));
-      program.uniforms.uAngle.value = angle; program.uniforms.uRadius.value = Math.min(10, Math.min(w, h) / 2) * dpr;
+      program.uniforms.uAngle.value = angle; program.uniforms.uRadius.value = Math.min(RADIUS, Math.min(w, h) / 2) * dpr;
       program.uniforms.uIntensity.value = 1.15 * bright; renderer.render({ scene: mesh }); raf = requestAnimationFrame(update);
     };
     raf = requestAnimationFrame(update);
@@ -90,7 +95,7 @@ export default function SpecularButton({ children, className = '', ...props }: P
   }, []);
 
   return (
-    <button ref={btnRef} className={`specular-button ${className}`} {...props}>
+    <button ref={btnRef} className={`specular-button specular-button--${variant} specular-button--${size} ${className}`} {...props}>
       <span ref={fxRef} className="specular-button__fx" aria-hidden="true" />
       <span className="specular-button__label">{children}</span>
     </button>

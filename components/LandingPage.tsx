@@ -46,11 +46,11 @@ export default function LandingPage() {
 
   return (
     <main>
-      <Header />
+      <Header onApply={openApply} />
       <LineSidebar />
       <ScrollVideoScene onApply={openApply} />
 
-      <section className="reasoning-section" aria-labelledby="reasoning-title">
+      <section id="method" className="reasoning-section" aria-labelledby="reasoning-title">
         <div className="section-shell reasoning-shell">
           <div className="reasoning-hero">
             <div>
