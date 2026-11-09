@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.109.0",
     "gsap": "3.15.0",
-    "next": "15.5.22",
+    "lucide-react": "^1.70.0",
+    "next": "^15.5.29",
     "ogl": "1.0.11",
     "react": "19.1.1",
     "react-dom": "19.1.1",
@@ -23,7 +25,7 @@
     "@types/react-dom": "^19.1.0",
     "@types/three": "^0.179.0",
     "eslint": "^9.24.0",
-    "eslint-config-next": "15.5.22",
+    "eslint-config-next": "^15.5.29",
     "typescript": "^5.8.3"
   }
 }

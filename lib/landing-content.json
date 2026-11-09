@@ -1,0 +1,148 @@
+{
+  "hero": {
+    "eyebrow": "Computational Geological Reasoning\u2122 (CGR\u2122)",
+    "heading": "Make Better Target Decisions\nBefore You Drill.",
+    "body": "Transforming exploration from pattern matching to Computational Geological Reasoning\u2122.",
+    "button": "Apply to Join",
+    "note": "Limited Early Adopter Program"
+  },
+  "prediction": {
+    "eyebrow": "From Prediction To Reasoning",
+    "body": "Prediction shaped the last generation of exploration.",
+    "supporting": "Reasoning will shape the next."
+  },
+  "firstPrinciples": {
+    "eyebrow": "First Principles",
+    "heading": "Ore deposits are not predictable.",
+    "body": "Deposits footprints are noisy, localized expressions of underlying mineral systems.",
+    "paragraphOne": "While observations are incomplete and inconsistent, the systems themselves are governed by invariants.",
+    "paragraphTwo": "Understanding comes from identifying what remains consistent within noise - not from pattern matching.",
+    "paragraphThree": "Prediction fails where the system is not understood."
+  },
+  "problem": {
+    "label": "PROBLEM",
+    "statements": "Data-Rich. Interpretation-Poor. Resource-Constrained.",
+    "preIntro": "Exploration operates on sparse, indirect, and often conflicting observations.",
+    "heading": "Decisions Are Made Under Noise",
+    "body": "What we observe at the deposit scale is noisy and incomplete - yet mineralisation models used for decision-making are built on these observations, shaped by noisy patterns and subjective interpretation.",
+    "listIntro": "This leads to:",
+    "bulletOne": "High rates of unsuccessful drilling",
+    "bulletTwo": "Overconfidence in weak signals",
+    "bulletThree": "Limited ability to test competing interpretations",
+    "bulletFour": "Poor visibility into decision-making logic"
+  },
+  "limitations": {
+    "eyebrow": "LIMITATIONS",
+    "heading": "Patterns Don\u2019t Equal Understanding",
+    "paragraphOne": "Most approaches rely on statistical patterns and assumed transferability.",
+    "paragraphTwo": "They treat deposits as comparable - even when the underlying systems differ.",
+    "listIntro": "In practice:",
+    "bulletOne": "Models fit noise in sparse and incomplete datasets",
+    "bulletTwo": "Correlation is mistaken for understanding",
+    "bulletThree": "Outputs are accepted rather than rigorously challenged",
+    "closing": "The result is the illusion of predictive accuracy - without grounding in the underlying system."
+  },
+  "reasoning": {
+    "eyebrow": "IREX Bridges the Gap",
+    "heading": "Generate. Test. Reject.",
+    "body": "At scale, before drilling decisions are made.",
+    "intro": "IREX applies a rigorous reasoning process:",
+    "stepOneTitle": "Generate",
+    "stepOneBody": "Construct multiple geological hypotheses using structured data and mineral-system topology.",
+    "stepTwoTitle": "Test",
+    "stepTwoBody": "Evaluate each hypothesis against evidence and system constraints.",
+    "stepThreeTitle": "Reject",
+    "stepThreeBody": "Eliminate interpretations that fail to satisfy invariant relationships."
+  },
+  "principle": {
+    "eyebrow": "CORE PRINCIPLE",
+    "headingFirst": "Every Deposit Is Individual",
+    "headingSecond": "Systems Have Invariants.",
+    "contrastFirst": "DEPOSIT FOOTPRINTS",
+    "contrastFirstEmphasis": "ARE NOISY.",
+    "contrastSecond": "MINERAL SYSTEMS",
+    "contrastSecondEmphasis": "ARE NOT.",
+    "body": "While observations vary, the underlying geological processes follow invariant relationships. IREX identifies and reasons over these invariants \u2014 treating each target as a system to be understood, not a pattern to be matched.",
+    "closing": "EXPLORATION IS A REASONING PROBLEM, NOT PREDICTION."
+  },
+  "transparency": {
+    "eyebrow": "TRANSPARENCY",
+    "heading": "Designed for Auditability",
+    "itemOneTitle": "TRACEABLE REASONING",
+    "itemOneBody": "Traceable reasoning behind every result",
+    "itemTwoTitle": "EXPLICIT LINKS",
+    "itemTwoBody": "Explicit links between data and conclusions",
+    "itemThreeTitle": "JUSTIFIED DECISIONS",
+    "itemThreeBody": "Clear justification for accepted and rejected hypotheses",
+    "itemFourTitle": "REPRODUCIBLE OUTCOMES",
+    "itemFourBody": "Consistent, reproducible outcomes",
+    "closingFirst": "Every decision can be inspected and challenged.",
+    "closingSecond": "Every outcome can be examined and verified."
+  },
+  "control": {
+    "eyebrow": "CONTROL",
+    "heading": "Built for Control",
+    "body": "Designed for environments where control, reliability, and data ownership are non-negotiable.",
+    "itemOneTitle": "INFRASTRUCTURE",
+    "itemOneBody": "Fully deployable within your infrastructure",
+    "itemTwoTitle": "DATA OWNERSHIP",
+    "itemTwoBody": "No sensitive data leaves your environment",
+    "itemThreeTitle": "INDEPENDENCE",
+    "itemThreeBody": "Personalised AI without external dependencies",
+    "itemFourTitle": "DETERMINISTIC",
+    "itemFourBody": "Deterministic, reproducible execution",
+    "itemFiveTitle": "EXPERT CONTROL",
+    "itemFiveBody": "Expert-in-the-loop control with override capability",
+    "itemSixTitle": "DOMAIN KNOWLEDGE",
+    "itemSixBody": "Domain expertise explicitly encoded into system reasoning",
+    "closing": "The system operates fully within your control \u2014 technically, operationally, and decisively."
+  },
+  "value": {
+    "eyebrow": "ECONOMIC VALUE",
+    "heading": "Reduce Risk Before It Becomes Capital",
+    "body": "IREX fundamentally improves how high-stakes exploration decisions are made.",
+    "itemOne": "Generate and evaluate multiple geological scenarios rapidly",
+    "itemTwo": "Test interpretations before committing to drilling",
+    "itemThree": "Reject weak targets early",
+    "itemFour": "Reduce false positives",
+    "outcomeLead": "Fewer costly errors.",
+    "outcomeBody": "Capital deployed with discipline.",
+    "closing": "IREX optimizes for Decision Quality, Not Prediction Accuracy."
+  },
+  "positioning": {
+    "eyebrow": "Built for Reasoning",
+    "heading": "IREX Is Not Another prediction model.",
+    "body": "It is a reasoning system designed to identify invariants within noisy data \u2014 enabling decisions grounded in system understanding, not statistical patterns."
+  },
+  "cgr": {
+    "eyebrow": "Computational Geological Reasoning\u2122 (CGR\u2122)",
+    "intro": "Geological reasoning has guided mineral discovery for generations.",
+    "standout": "CGR\u2122 extends geological reasoning into computational systems.",
+    "body": "CGR\u2122 extends beyond prediction by transforming exploration data into structured geological knowledge, systematically generating, testing, and rejecting competing interpretations to converge on the most evidence-supported geological hypotheses under uncertainty.",
+    "closing": "IREX\u00ae is developing, validating, and commercialising CGR\u2122 as a new category of exploration intelligence for decision-making under uncertainty."
+  },
+  "apply": {
+    "heading": "Early Adopter Program",
+    "body": "For leaders responsible for exploration strategy, capital allocation, and high-stakes decisions under uncertainty.",
+    "button": "Apply to Join",
+    "note": "Limited Foundation Partner Opportunities"
+  },
+  "site": {
+    "headerStatement": "REASONING FIRST",
+    "footerTagline": "CGR\u2122 is the next evolution of exploration intelligence."
+  },
+  "application": {
+    "eyebrow": "EARLY ADOPTER PROGRAM",
+    "heading": "Better Decisions. Fewer Costly Errors.",
+    "body": "Foundation Partners gain an early voice in defining how Computational Geological Reasoning\u2122 is applied to real exploration decisions.",
+    "nameLabel": "Name",
+    "companyLabel": "Company",
+    "emailLabel": "Email",
+    "messageLabel": "Message",
+    "submitButton": "Submit Application",
+    "sendingButton": "Sending\u2026",
+    "successHeading": "Application received.",
+    "successBody": "Thank you. We\u2019ll be in touch.",
+    "error": "Unable to send right now. Please try again."
+  }
+}

@@ -596,11 +596,11 @@ h2 {
     margin: 0;
 }
 
-.scene-highlight {
+.scene-copy .scene-highlight {
     font-weight: 700;
-    font-size: clamp(1.1rem, 2vw, 1.55rem) !important;
-    line-height: 1.35 !important;
-    color: var(--coral) !important;
+    font-size: clamp(1.1rem, 2vw, 1.55rem);
+    line-height: 1.35;
+    color: var(--coral);
 }
 
 .scene-bullets {
@@ -849,10 +849,10 @@ h2 {
     line-height: 1.45;
 }
 
-.reasoning-intro {
-    margin-top: 1rem !important;
-    margin-bottom: -1.8rem !important;
-    color: var(--muted) !important;
+.reasoning-hero p.reasoning-intro {
+    margin-top: 1rem;
+    margin-bottom: -1.8rem;
+    color: var(--muted);
 }
 
 .reasoning-columns {
@@ -1154,6 +1154,10 @@ h2 {
     color: var(--copper);
 }
 
+.value-outcome span.value-outcome-body {
+    color: inherit;
+}
+
 .value-outcome p:last-child,
 .value-decision-line {
     color: var(--coral);
@@ -1165,7 +1169,7 @@ h2 {
     font-size: clamp(1rem, 1.7vw, 1.35rem);
     font-weight: 700;
     line-height: 1.45;
-    color: #FF5860 !important;
+    color: #FF5860;
     white-space: normal;
 }
 

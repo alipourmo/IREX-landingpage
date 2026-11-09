@@ -4,10 +4,13 @@ import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { textAppearance } from './admin/model';
+import { useSiteContent } from './LiveContentProvider';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
+  const { copy, appearance } = useSiteContent();
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     const el = ref.current; if (!el) return;
@@ -23,7 +26,7 @@ export default function Header() {
   return (
     <header ref={ref} className="site-header">
       <a href="#hero" className="brand" aria-label="IREX home"><Image src="/brand/irex-logo-dark.png" alt="IREX" width={150} height={48} priority /></a>
-      <span className="header-statement">REASONING FIRST</span>
+      <span className="header-statement" style={textAppearance(appearance, 'site', 'headerStatement')}>{copy.site.headerStatement}</span>
     </header>
   );
 }

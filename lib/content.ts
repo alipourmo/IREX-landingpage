@@ -1,3 +1,5 @@
+import originalContent from './landing-content.json';
+
 export const sections = [
   { id: 'hero', label: 'Hero' },
   { id: 'principle', label: 'Principle' },
@@ -36,52 +38,39 @@ export type VideoScene = {
   preIntro?: string;
 };
 
-export const videoScenes: VideoScene[] = [
+export function createVideoScenes(copy: typeof originalContent): VideoScene[] {
+  return [
   {
     id: 'cgr',
-    eyebrow: 'Computational Geological Reasoning™ (CGR™)',
+    eyebrow: copy.hero.eyebrow,
     start: 0,
     end: 3.23,
     label: 'HERO SECTION',
-    title: 'Make Better Target Decisions\nBefore You Drill.',
-    body: 'Transforming exploration from pattern matching to Computational Geological Reasoning™.',
+    title: copy.hero.heading,
+    body: copy.hero.body,
     coreLine: 'Generate. Test. Reject',
     cta: true,
   },
   {
     id: 'prediction',
-    eyebrow: 'From Prediction To Reasoning',
+    eyebrow: copy.prediction.eyebrow,
     start: 3.23,
     end: 8.07,
     label: 'FROM PREDICTION TO REASONING',
     title: '',
-    body: 'Prediction shaped the last generation of exploration.',
-    blocks: [
-      {
-        body: [
-          'Reasoning will shape the next.',
-        ],
-      },
-    ],
+    body: copy.prediction.body,
+    blocks: [{ body: [copy.prediction.supporting] }],
   },
   {
     id: 'first-principles',
-    eyebrow: 'First Principles',
+    eyebrow: copy.firstPrinciples.eyebrow,
     start: 8.07,
     end: 14.46,
     label: 'FIRST PRINCIPLES',
-    title: 'Ore deposits are not predictable.',
-    body: 'Deposits footprints are noisy, localized expressions of underlying mineral systems.',
-    blocks: [
-      {
-        body: [
-          'While observations are incomplete and inconsistent, the systems themselves are governed by invariants.',
-          'Understanding comes from identifying what remains consistent within noise - not from pattern matching.',
-          'Prediction fails where the system is not understood.',
-        ],
-      },
-    ],
-    highlights: ['Prediction fails where the system is not understood.'],
+    title: copy.firstPrinciples.heading,
+    body: copy.firstPrinciples.body,
+    blocks: [{ body: [copy.firstPrinciples.paragraphOne, copy.firstPrinciples.paragraphTwo, copy.firstPrinciples.paragraphThree] }],
+    highlights: [copy.firstPrinciples.paragraphThree],
     coreLine: 'Generate. Test. Reject',
     cta: true,
   },
@@ -90,46 +79,25 @@ export const videoScenes: VideoScene[] = [
     eyebrow: '',
     start: 14.46,
     end: 20.64,
-    label: 'PROBLEM',
-    title: 'Decisions Are Made Under Noise',
-    statements: ['Data-Rich. Interpretation-Poor. Resource-Constrained.'],
-    preIntro: 'Exploration operates on sparse, indirect, and often conflicting observations.',
-    blocks: [
-      {
-        body: [
-          'What we observe at the deposit scale is noisy and incomplete - yet mineralisation models used for decision-making are built on these observations, shaped by noisy patterns and subjective interpretation.',
-        ],
-      },
-    ],
-    listIntro: 'This leads to:',
-    bullets: [
-      'High rates of unsuccessful drilling',
-      'Overconfidence in weak signals',
-      'Limited ability to test competing interpretations',
-      'Poor visibility into decision-making logic',
-    ],
+    label: copy.problem.label,
+    title: copy.problem.heading,
+    statements: [copy.problem.statements],
+    preIntro: copy.problem.preIntro,
+    blocks: [{ body: [copy.problem.body] }],
+    listIntro: copy.problem.listIntro,
+    bullets: [copy.problem.bulletOne, copy.problem.bulletTwo, copy.problem.bulletThree, copy.problem.bulletFour],
   },
   {
     id: 'limitations',
-    eyebrow: 'LIMITATIONS',
+    eyebrow: copy.limitations.eyebrow,
     start: 20.64,
     end: 25,
     label: 'LIMITATIONS',
-    title: 'Patterns Don’t Equal Understanding',
-    blocks: [
-      {
-        body: [
-          'Most approaches rely on statistical patterns and assumed transferability.',
-          'They treat deposits as comparable - even when the underlying systems differ.',
-        ],
-      },
-    ],
-    listIntro: 'In practice:',
-    bullets: [
-      'Models fit noise in sparse and incomplete datasets',
-      'Correlation is mistaken for understanding',
-      'Outputs are accepted rather than rigorously challenged',
-    ],
-    closing: 'The result is the illusion of predictive accuracy - without grounding in the underlying system.',
+    title: copy.limitations.heading,
+    blocks: [{ body: [copy.limitations.paragraphOne, copy.limitations.paragraphTwo] }],
+    listIntro: copy.limitations.listIntro,
+    bullets: [copy.limitations.bulletOne, copy.limitations.bulletTwo, copy.limitations.bulletThree],
+    closing: copy.limitations.closing,
   },
-];
+  ];
+}

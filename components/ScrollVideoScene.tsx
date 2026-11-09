@@ -3,14 +3,26 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { narrativeMobileVideo, narrativeVideo, videoScenes } from '@/lib/content';
+import { createVideoScenes, narrativeMobileVideo, narrativeVideo } from '@/lib/content';
+import { textAppearance } from './admin/model';
+import { useSiteContent } from './LiveContentProvider';
 import SpecularButton from './SpecularButton';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const NARRATIVE_DURATION = 25;
+type SceneFields = { section: string; eyebrow?: string; heading?: string; body?: string; label?: string; statements?: string[]; preIntro?: string; blocks?: string[]; listIntro?: string; bullets?: string[]; closing?: string };
+const sceneFields: SceneFields[] = [
+  { section: 'hero', eyebrow: 'eyebrow', heading: 'heading', body: 'body' },
+  { section: 'prediction', eyebrow: 'eyebrow', body: 'body', blocks: ['supporting'] },
+  { section: 'firstPrinciples', eyebrow: 'eyebrow', heading: 'heading', body: 'body', blocks: ['paragraphOne', 'paragraphTwo', 'paragraphThree'] },
+  { section: 'problem', label: 'label', heading: 'heading', statements: ['statements'], preIntro: 'preIntro', blocks: ['body'], listIntro: 'listIntro', bullets: ['bulletOne', 'bulletTwo', 'bulletThree', 'bulletFour'] },
+  { section: 'limitations', eyebrow: 'eyebrow', heading: 'heading', blocks: ['paragraphOne', 'paragraphTwo'], listIntro: 'listIntro', bullets: ['bulletOne', 'bulletTwo', 'bulletThree'], closing: 'closing' },
+];
 
 export default function ScrollVideoScene({ onApply }: { onApply?: () => void }) {
+  const { copy, appearance } = useSiteContent();
+  const videoScenes = useMemo(() => createVideoScenes(copy), [copy]);
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const readyRef = useRef(false);
@@ -19,7 +31,7 @@ export default function ScrollVideoScene({ onApply }: { onApply?: () => void }) 
   const [activeIndex, setActiveIndex] = useState(0);
 
   const progressStops = useMemo(
-    () => videoScenes.map((scene) => ({ start: scene.start / NARRATIVE_DURATION, end: scene.end / NARRATIVE_DURATION })),
+    () => [[0, 3.23], [3.23, 8.07], [8.07, 14.46], [14.46, 20.64], [20.64, 25]].map(([start, end]) => ({ start: start / NARRATIVE_DURATION, end: end / NARRATIVE_DURATION })),
     [],
   );
 
@@ -98,7 +110,10 @@ export default function ScrollVideoScene({ onApply }: { onApply?: () => void }) 
       </div>
 
       <div className="scene-copy-stack">
-        {videoScenes.map((scene, index) => (
+        {videoScenes.map((scene, index) => {
+          const fields = sceneFields[index];
+          const style = (field?: string) => field ? textAppearance(appearance, fields.section, field) : undefined;
+          return (
           <article
             key={scene.id}
             data-scene={scene.id}
@@ -107,20 +122,20 @@ export default function ScrollVideoScene({ onApply }: { onApply?: () => void }) 
           >
             {scene.eyebrow && (
               <div className="scene-kicker">
-                <span className="eyebrow">{scene.eyebrow}</span>
+                <span className="eyebrow" style={style(fields.eyebrow)}>{scene.eyebrow}</span>
               </div>
             )}
             {scene.statements && scene.statements.length > 0 && (
               <div className="scene-intro">
-                {scene.label && <span className="scene-intro__label">{scene.label}</span>}
-                {scene.statements.map((line) => (
-                  <p className="scene-intro__statement" key={line}>{line}</p>
+                {scene.label && <span className="scene-intro__label" style={style(fields.label)}>{scene.label}</span>}
+                {scene.statements.map((line, lineIndex) => (
+                  <p className="scene-intro__statement" style={style(fields.statements?.[lineIndex])} key={lineIndex}>{line}</p>
                 ))}
-                {scene.preIntro && <p className="scene-intro__body">{scene.preIntro}</p>}
+                {scene.preIntro && <p className="scene-intro__body" style={style(fields.preIntro)}>{scene.preIntro}</p>}
               </div>
             )}
-            <h1>{scene.title}</h1>
-            {scene.body && <p className="scene-lead">{scene.body}</p>}
+            <h1 style={style(fields.heading)}>{scene.title}</h1>
+            {scene.body && <p className="scene-lead" style={style(fields.body)}>{scene.body}</p>}
             {scene.highlights
               ?.filter((line) => !scene.blocks?.some((block) => block.body?.includes(line)))
               .map((line) => <p className="scene-highlight" key={line}>{line}</p>)}
@@ -128,33 +143,34 @@ export default function ScrollVideoScene({ onApply }: { onApply?: () => void }) 
             {scene.blocks?.map((block, blockIndex) => (
               <div className="scene-text-block" key={`${scene.id}-${blockIndex}`}>
                 {block.heading && <h2>{block.heading}</h2>}
-                {block.body?.map((line) => (
-                  <p className={scene.highlights?.includes(line) ? 'scene-highlight' : undefined} key={line}>
+                {block.body?.map((line, lineIndex) => (
+                  <p className={scene.highlights?.includes(line) ? 'scene-highlight' : undefined} style={style(fields.blocks?.[lineIndex])} key={lineIndex}>
                     {line}
                   </p>
                 ))}
               </div>
             ))}
 
-            {scene.listIntro && <p className="scene-list-intro">{scene.listIntro}</p>}
+            {scene.listIntro && <p className="scene-list-intro" style={style(fields.listIntro)}>{scene.listIntro}</p>}
             {scene.bullets && (
               <ul className="scene-bullets">
-                {scene.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                {scene.bullets.map((bullet, bulletIndex) => <li key={bulletIndex} style={style(fields.bullets?.[bulletIndex])}>{bullet}</li>)}
               </ul>
             )}
-            {scene.closing && <p className="scene-closing">{scene.closing}</p>}
+            {scene.closing && <p className="scene-closing" style={style(fields.closing)}>{scene.closing}</p>}
             {scene.coreLine && !scene.cta && <p className="scene-core-line">{scene.coreLine}</p>}
 
             {scene.cta && onApply && (
               <div className="hero-actions">
-                <SpecularButton onClick={onApply}>
-                  Apply to Join <span aria-hidden="true">↗</span>
+                <SpecularButton onClick={onApply} style={textAppearance(appearance, 'hero', 'button')}>
+                  {copy.hero.button} <span aria-hidden="true">↗</span>
                 </SpecularButton>
-                <span className="microcopy">Limited Early Adopter Program</span>
+                <span className="microcopy" style={textAppearance(appearance, 'hero', 'note')}>{copy.hero.note}</span>
               </div>
             )}
           </article>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
