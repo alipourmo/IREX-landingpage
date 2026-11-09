@@ -49,20 +49,30 @@ export function validateContent(value: unknown, original: Content): Content | nu
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
   const incoming = value as Record<string, unknown>;
   const result: Content = {};
-  if (Object.keys(incoming).some((id) => !Object.prototype.hasOwnProperty.call(original, id))) return null;
+  let matchedSections = 0;
 
   for (const id of Object.keys(original)) {
     const source = incoming[id];
+    if (source === undefined) {
+      result[id] = { ...original[id] };
+      continue;
+    }
     if (!source || typeof source !== 'object' || Array.isArray(source)) return null;
+    matchedSections += 1;
     const values = source as Record<string, unknown>;
-    if (Object.keys(values).some((key) => !Object.prototype.hasOwnProperty.call(original[id], key))) return null;
     result[id] = {};
     for (const key of Object.keys(original[id])) {
-      if (typeof values[key] !== 'string' || (values[key] as string).length > 10000) return null;
-      result[id][key] = values[key] as string;
+      const candidate = values[key];
+      if (candidate === undefined) {
+        result[id][key] = original[id][key];
+        continue;
+      }
+      if (typeof candidate !== 'string' || candidate.length > 10000) return null;
+      result[id][key] = candidate;
     }
   }
-  return result;
+
+  return matchedSections > 0 ? result : null;
 }
 
 export function validateAppearance(value: unknown, content: Content): Appearance | null {

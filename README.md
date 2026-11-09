@@ -1,6 +1,6 @@
 # IREX Landing Page
 
-Next.js 15 / React 19 landing page for IREX Pty Ltd.
+Next.js 15 / React 19 landing page and Content Studio for IREX Pty Ltd.
 
 ## Stack
 - Next.js 15.5.x + App Router
@@ -19,8 +19,8 @@ cp .env.example .env.local
 npm run dev
 ```
 
-## Application form
-The `/api/apply` route sends Early Adopter applications through Resend.
+## Application form & records
+The `/api/apply` route validates Turnstile, dispatches Early Adopter applications through Resend, and stores each submission as a record in `public.irex_applications` (or `.data/applications.json` in local development when Supabase is not configured).
 Configure:
 - `RESEND_API_KEY`
 - `APPLICATION_EMAIL=irex.pty.ltd@gmail.com`
@@ -34,33 +34,25 @@ The scroll-scrub narrative video is served as WebM from `public/media`. Static f
 ## Footer
 LinkedIn: https://www.linkedin.com/company/irex-pty-ltd/
 
-## Content Studio
-Open `/admin` to edit text and its font, size, and color. The appearance
-controls use the Instrument Serif and DM Mono families, type scale, and color
-palette from IREX Design System v2. Without live sync, edits are local drafts.
-Backups include both content and appearance, and up to eight local versions are
-kept in the current browser.
+## Content Studio & Application Records (`/admin`)
+Open `/admin` to sign in to the IREX Design System v2 Content Studio. Editors can:
+- Edit all 15 landing page sections (copy + Instrument Serif / DM Mono typography, type scale, and brand colors)
+- Preview individual sections on desktop/mobile or open a full-page `/?preview=draft` preview
+- Manage Early Adopter application submissions (filter, search, update status, record internal notes, export CSV, delete)
 
-### Set up live sync
+### Set up Supabase (Live Sync + Application Records + Auth)
 1. Create a Supabase project and run `supabase/live-content.sql` in its SQL editor.
-   This creates the content and editor tables, enables Realtime, and limits
-   writes to explicitly authorized accounts through row-level security.
-2. Create an editor in Supabase Auth. Add its user UUID to
-   `public.irex_content_editors` using the SQL example at the end of the script.
-   Disable public sign-ups if they are not needed.
-3. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to the
-   project URL and publishable/anon key in the hosting environment. Do not use
-   a service-role or secret key in these variables.
-4. Commit and deploy this application, and point the website domain at that
-   deployment. Environment changes require a deployment to take effect.
-5. Open `/admin`, choose **Connect live**, and sign in as the authorized
-   editor. While connected, changes are saved automatically after a short pause.
-   Visitors receive updates through Supabase Realtime without a new deployment;
-   a periodic refresh also recovers from interrupted connections.
+   This creates `irex_content_editors`, `irex_live_content`, and `irex_applications`,
+   enables Realtime, and configures row-level security.
+2. Create an editor user in Supabase Auth (or run `npm run setup:supabase` with
+   `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_EMAIL`, and `ADMIN_PASSWORD`),
+   then ensure the user UUID is listed in `public.irex_content_editors`.
+3. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in Vercel / hosting
+   environment variables (and optionally `SUPABASE_SERVICE_ROLE_KEY` for server-side updates).
+4. Deploy the application so environment variables take effect.
 
-Live data is stored in Supabase, not committed to GitHub. The editor checks a
-revision number before each update and stops syncing if another editor has
-changed the live document. Reconnect to review the latest version. Editor
-sessions remain in memory only; the database policies remain the authority for
-write access. For a standalone Vite preview, the equivalent variables are
-`VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+### Optional Server Env Auth Fallback
+If Supabase is not configured yet, `/admin` also supports server-verified login using:
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD_HASH` (generate with `ADMIN_PASSWORD='...' node scripts/hash-password.mjs`)
+- `ADMIN_SESSION_SECRET`
